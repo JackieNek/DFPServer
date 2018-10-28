@@ -4,7 +4,7 @@
   "description": "Cung cấp các api cho xử lý phân tán hai luồng dữ liệu json đầu vào có dạng { ai nói, thời điểm } và { thời điểm, nột dung nới }",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/JackieNek/DFPServer#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "nodemon": "^1.18.5"
   }
 }
