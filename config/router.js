@@ -1,5 +1,5 @@
-const api = require('../api');
 
-module.exports = application => {
+module.exports = (application, lib) => {
+  const api = require('../api')(lib);
   application.use('/api', api);
 };

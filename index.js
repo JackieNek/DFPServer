@@ -1,12 +1,23 @@
 const http = require('http');
-const MongoClient = require('mongodb').MongoClient;
-
 const PORT = require('./constants').PORT;
-const application = require("./config/app");
+const mongo = require('./config/db')
+let server;
 
-const server = http.createServer(application);
-server.listen(PORT, () => {
-  console.log('Server is running on port: '+ PORT);
+mongo(db => {
+  registCollection(db)
+
+  const lib = require('./lib')(db);
+  const application = require("./config/app")(lib);
+  server = http.createServer(application);
+  start(db);
 });
 
-require('./config/db')(MongoClient);
+function registCollection(db) {
+  require('./lib/collection')(db);
+}
+
+function start() {
+  server.listen(PORT, () => {
+    console.log('Server is running on port: '+ PORT);
+  });
+}
