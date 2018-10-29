@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-require('./test')(router);
-
-module.exports = router;
+module.exports = lib => {
+  // đăng ký các api tại đây
+  require('./test')(router, lib);
+  return router
+}

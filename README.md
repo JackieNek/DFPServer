@@ -18,3 +18,17 @@ Cung cấp các api cho việc xử lý file phân tán
   restart server bằng lệnh `rs`
 ### 5. Kiểm tra:
   truy cập `http://localhost:8000/api/test` bằng trình duyệt kết quả thu được chuỗi json `{"test":"ok"}`
+
+## Dành cho dev
+### 1. Làm việc với cơ sở dữ liệu
+##### Đăng ký collection trong cơ sở dữ liệu
+  Tạo một mô hình collection trong `lib/collection/`(tham khảo `lib/collection/test.js`) và đăng ký nó trong file `lib/collection/index.js`
+##### CRUD với collection
+  Tạo một file trong `lib/` tại đây có thể xử lý các thao tác crud với collection (tham khảo `lib/test.js`) đăng ký trong file `lib/index.js`
+### 2. Phát triển api
+##### Đăng ký api
+  Tham khảo file `api/index.js`
+##### Cấu trúc api
+  Tham khảo folder `api/test`
+##### Sử đụng CRUD với api trong controller hoặc middleware
+  `lib.collectionName.function()`
