@@ -1,2 +1,7 @@
 node_modules/
 package-lock.json
+.idea/modules.xml
+.idea/Server.iml
+.idea/workspace.xml
+.idea/misc.xml
+.idea/vcs.xml
