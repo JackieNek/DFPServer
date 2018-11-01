@@ -10,10 +10,8 @@ module.exports = lib => {
                 next(err);
             } else if (!user) {
                 res.status(401).json({
-                    err : {
                         code: 1001,
                         message: 'Username or password wrong'
-                    }
                 });
             }
             req.logIn(user, err => {
