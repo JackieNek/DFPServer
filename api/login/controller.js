@@ -9,9 +9,9 @@ module.exports = lib => {
             if (err) {
                 next(err);
             } else if (!user) {
-                res.status(1001).json({
+                res.status(401).json({
                     err : {
-                        code: 1001,
+                        code: 401,
                         message: 'Username or password wrong'
                     }
                 });

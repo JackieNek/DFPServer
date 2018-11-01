@@ -19,6 +19,7 @@ module.exports = lib => {
   }
 
   function createData(req, res) {
+    if (!req.data) res.status(200).json(req.file);
     lib.record.createMany(req.data, (err, data) => {
       if (err) res.status(500).json({
         err: {
@@ -43,6 +44,6 @@ module.exports = lib => {
   }
 
   function remove(req, res) {
-    
+
   }
 }

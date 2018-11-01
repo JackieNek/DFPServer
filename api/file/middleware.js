@@ -19,12 +19,12 @@ module.exports = lib => {
   }
 
   function mergeFile(req, res, next) {
-    req.data = req.body.data;
+    if (req.body.data) req.data = req.body.data;
     next();
   }
 
   function validateData(req, res, next) {
-    req.data.map(record => record.fileId = req.file._id);
+    if (req.data) req.data.map(record => record.fileId = req.file._id);
     next();
   }
 };

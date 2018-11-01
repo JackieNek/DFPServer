@@ -1,12 +1,20 @@
 module.exports = (router, lib) => {
     const controller = require('./controller')(lib);
-    const loginMiddleware = require('./../login/middlerware');
+    const auth = require('../login/middlerware')(lib);
 
-    router.get('/record', controller.list);
+    router.get('/record',
+        auth.checkLogin,
+        controller.list);
 
-    router.post('/record', controller.create);
+    router.post('/record',
+        auth.checkLogin,
+        controller.create);
 
-    router.delete('/record/:id', controller.remove);
+    router.delete('/record/:id',
+        auth.checkLogin,
+        controller.remove);
 
-    router.put('/record/:id', controller.update);
+    router.put('/record/:id',
+        auth.checkLogin,
+        controller.update);
 };

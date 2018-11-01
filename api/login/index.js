@@ -2,7 +2,7 @@ module.exports = (router, lib) => {
     const controller = require('./controller')(lib);
     const middlerware = require('./middlerware')(lib);
 
-    router.post('/login', middlerware.validateObj, controller.login);
+    router.post('/login', controller.login);
     // router.get("/testlogin", (req, res, next) => {
     //     if (req.isAuthenticated()) {
     //         delete user.username;
