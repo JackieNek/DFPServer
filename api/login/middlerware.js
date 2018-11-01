@@ -1,10 +1,16 @@
 module.exports = lib => {
     return {
-        validateObj: validateObj
+        checkLogin: checkLogin
     };
 
-    function validateObj(req, res, next) {
-        console.log(req.isAuthenticated());
+    function checkLogin(req, res, next) {
+        if (req.isAuthenticated()) {
             next();
+        } else {
+            res.status(401).json({
+                code: 401,
+                message: "Unauthorized"
+            });
+        }
     }
 }
