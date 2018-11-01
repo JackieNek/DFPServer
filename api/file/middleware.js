@@ -2,12 +2,15 @@ module.exports = lib => {
   return {
     createFile,
     mergeFile,
-    validateData
+    validateData,
+    canRemove,
+    canUpdate
   };
 
   function createFile(req, res, next) {
+    req.body.file.creator = req.user._id;    
     lib.file.create(req.body.file, (err, data) => {
-      if(err) res.status(500).json({
+      if(err) return res.status(500).json({
         err: {
           code: 500,
           message: 'Unable to create file'
@@ -25,6 +28,14 @@ module.exports = lib => {
 
   function validateData(req, res, next) {
     if (req.data) req.data.map(record => record.fileId = req.file._id);
+    next();
+  }
+
+  function canRemove(req, res, next) {
+    next();
+  }
+
+  function canUpdate(req, res, next) {
     next();
   }
 };
