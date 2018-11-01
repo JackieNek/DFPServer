@@ -11,14 +11,14 @@ module.exports = lib => {
             } else if (!user) {
                 res.status(401).json({
                     err : {
-                        code: 401,
+                        code: 1001,
                         message: 'Username or password wrong'
                     }
                 });
             }
             req.logIn(user, err => {
                 if (err) {
-                    console.log(err + "");
+                    // error login
                 } else {
                     delete user.username;
                     delete user.password;
