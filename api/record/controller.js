@@ -8,49 +8,49 @@ module.exports = lib => {
 
   function list(req, res) {    
     lib.record.list(req.query, (err, data) => {
-      if (err) res.status(500).json({
+      if (err) return res.status(500).json({
         err: {
           code: 500,
           message: 'Unable to list record'
         }
       });
-      res.status(200).json(data);
+      return res.status(200).json(data);
     });
   }
 
   function create(req, res) {
     lib.record.create(req.body.record, (err, data) => {
-      if (err) res.status(500).json({
+      if (err) return res.status(500).json({
         err: {
           code: 500,
           message: 'Unable to create record document'
         }
       });
-      res.status(200).json(data.ops[0]);
+      return res.status(201).json(data.ops[0]);
     });
   }
 
   function remove(req, res) {
     lib.record.remove(req.params.id, (err, data) => {
-      if (err) res.status(500).json({
+      if (err) return res.status(500).json({
         err: {
           code: 500,
           message: 'Unable to delete record document'
         }
       });
-      res.status(204).end();
+      return res.status(204).end();
     });
   }
 
   function update(req, res) {
     lib.record.update(req.params.id, req.body.options, (err, data) => {
-      if (err) res.status(500).json({
+      if (err) return res.status(500).json({
         err: {
           code: 500,
           message: 'Unable to update record document'
         }
       });
-      res.status(200).json(data.value);
+      return res.status(200).json(data.value);
     });
   }
 }

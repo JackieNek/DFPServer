@@ -39,13 +39,13 @@ Cung cấp các api cho việc xử lý file phân tán
 
 ### RECORD
 #### Cấu trúc
-`{`
-`  fileId: String,`
-`  speaker: String,`
-`  time: Number,`
-`  content: String`
-`}`
-##### 1. GET `/api/record?query`
+###### `{`
+###### `  fileId: String,`
+###### `  speaker: String,`
+###### `  time: Number,`
+###### `  content: String`
+###### `}`
+##### 1. GET `/api/record`
 ##### Chức năng: liệt kê các bản ghi
 ##### Các tham số của query 
 ###### - `recordID`: id của bản ghi - kiểu dữ kiệu: ObjectID
@@ -53,9 +53,17 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### - `speaker`: người nói       - Kiểu dữ liệu: String
 ###### Đầu ra: Danh sách các bản ghi
 
-##### 2. POST /api/record
+##### 2. POST `/api/record/:fileID`
 ###### Chức năng: tạo mới một bản ghi
-###### Đầu vào: `record` chứa trong `body`
+###### Đầu vào: data1, data2 chứa trong `body`
+###### `data1: {`
+###### `  speaker: String,`
+###### `  time: Number,`
+###### `}`
+###### `data2: {`
+###### `  time: Number,`
+###### `  content: String`
+###### `}`
 ###### Đầu ra: `record` chứa thêm trường `_id`
 
 ##### 3. PUT `/api/record/:recordID`
@@ -64,19 +72,18 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`
 ###### Đầu ra: Bản ghi đã được sửa
 
-##### 3. DELETE `/api/record/:recordID`
+##### 4. DELETE `/api/record/:recordID`
 ###### Chức năng: Xóa một bản ghi có sẵn
 ###### Tham số `recordID` là id của bản ghi - kiểu dữ liệu ObjecID
-###### Đầu ra: Bản ghi đã được sửa
 
 ### FILE
 #### Cấu trúc
-`{`
-`  name: String,`
-`  creator: String,`
-`  owners: Array`
-`}`
-##### 1. GET `/api/file?query`
+###### `{`
+###### `  name: String,`
+###### `  creator: String,`
+###### `  owners: Array`
+###### `}`
+##### 1. GET `/api/file`
 ##### Chức năng: liệt kê các file
 ##### Các tham số của query 
 ###### - `creator`: id của bản ghi - kiểu dữ kiệu: ObjectID
@@ -84,13 +91,28 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### - `owner`: người nói        - Kiểu dữ liệu: ObjectID
 ###### Đầu ra: Danh sách các file
 
-##### 2. POST /api/file phần 2 này đang phát triển
-###### Chức năng: tạo mới một file từ hai file có cấu trúc
+##### 2. POST /api/file
+###### Chức năng: tạo mới một file
 ###### Đầu vào: 
+###### `file: {`
+###### `	name: "file 2",`
+###### `	time: 123456,`
+###### `	owners:[]`
+###### `}`
 ###### Đầu ra: 
+###### `file: {`
+###### `    _id: "5bd7039bae427baf213d5c05"`
+###### `	name: "file 2",`
+###### `	time: 123456,`
+###### `	owners:[]`
+###### `}`
 
 ##### 3. PUT `/api/file/:fileID`
 ###### Chức năng: Sửa một bản ghi có sẵn
 ###### Tham số `fileID` là id của bản ghi - kiểu dữ liệu ObjecID
 ###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`
 ###### Đầu ra: File đã được sửa thông tin
+
+##### 4. DELETE `/api/record/:id`
+###### Chức năng: Xóa một file có sẵn
+###### Tham số `id` là id của file - kiểu dữ liệu ObjecID

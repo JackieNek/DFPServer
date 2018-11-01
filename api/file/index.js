@@ -15,10 +15,12 @@ module.exports = (router, lib) => {
     controller.createData);
 
   router.delete('/file/:id',
-    auth.checkLogin,
+    // auth.checkLogin,
+    middleware.canRemove,
     controller.remove);
 
   router.put('/file/:id',
     auth.checkLogin,
+    middleware.canUpdate,
     controller.update);
 };
