@@ -66,13 +66,13 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `}`
 ###### Đầu ra: `record` chứa thêm trường `_id`
 
-##### 3. PUT `/api/record/:recordID`
+##### 3. PUT `/api/record/:id`
 ###### Chức năng: Sửa một bản ghi có sẵn
-###### Tham số `recordID` là id của bản ghi - kiểu dữ liệu ObjecID
+###### Tham số `id` là id của bản ghi - kiểu dữ liệu ObjecID
 ###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`
 ###### Đầu ra: Bản ghi đã được sửa
 
-##### 4. DELETE `/api/record/:recordID`
+##### 4. DELETE `/api/record/:id`
 ###### Chức năng: Xóa một bản ghi có sẵn
 ###### Tham số `recordID` là id của bản ghi - kiểu dữ liệu ObjecID
 
@@ -107,12 +107,12 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `	owners:[]`
 ###### `}`
 
-##### 3. PUT `/api/file/:fileID`
+##### 3. PUT `/api/file/:id`
 ###### Chức năng: Sửa một bản ghi có sẵn
 ###### Tham số `fileID` là id của bản ghi - kiểu dữ liệu ObjecID
 ###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`
 ###### Đầu ra: File đã được sửa thông tin
 
-##### 4. DELETE `/api/record/:id`
+##### 4. DELETE `/api/file/:id`
 ###### Chức năng: Xóa một file có sẵn
 ###### Tham số `id` là id của file - kiểu dữ liệu ObjecID
