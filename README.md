@@ -82,6 +82,7 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `  name: String,`
 ###### `  creator: String,`
 ###### `  owners: Array`
+###### `  createAt: Number` 
 ###### `}`
 ##### 1. GET `/api/file`
 ##### Chức năng: liệt kê các file
@@ -96,14 +97,14 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### Đầu vào: 
 ###### `file: {`
 ###### `	name: "file 2",`
-###### `	time: 123456,`
+###### `	createAt: 123456,`
 ###### `	owners:[]`
 ###### `}`
 ###### Đầu ra: 
 ###### `file: {`
 ###### `    _id: "5bd7039bae427baf213d5c05"`
 ###### `	name: "file 2",`
-###### `	time: 123456,`
+###### `	createAt: 123456,`
 ###### `	owners:[]`
 ###### `}`
 
