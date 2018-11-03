@@ -8,8 +8,8 @@ module.exports = lib => {
   };
 
   function createFile(req, res, next) {
-    req.body.file.creator = req.user._id;    
-    lib.file.create(req.body.file, (err, data) => {
+    req.body.creator = req.user._id;    
+    lib.file.create(req.body, (err, data) => {
       if(err) return res.status(500).json({
         err: {
           code: 500,

@@ -95,15 +95,14 @@ Cung cấp các api cho việc xử lý file phân tán
 ##### 2. POST /api/file
 ###### Chức năng: tạo mới một file
 ###### Đầu vào: 
-###### `file: {`
-###### `	name: "file 2",`
-###### `	createAt: 123456,`
-###### `	owners:[]`
-###### `}`
+###### `name: "file 2",`
+###### `createAt: 123456,`
+###### `owners:[]`
 ###### Đầu ra: 
-###### `file: {`
+###### `{`
 ###### `    _id: "5bd7039bae427baf213d5c05"`
 ###### `	name: "file 2",`
+###### `    creator: "5bd7039bae427baf213d5c05"
 ###### `	createAt: 123456,`
 ###### `	owners:[]`
 ###### `}`
