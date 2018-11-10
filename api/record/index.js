@@ -18,7 +18,7 @@ module.exports = (router, lib) => {
         controller.remove);
 
     router.put('/record/:id',
-        auth.checkLogin,
-        middleware.canUpdate,
+        // auth.checkLogin,
+        // middleware.canUpdate,
         controller.update);
 };

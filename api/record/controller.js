@@ -43,14 +43,27 @@ module.exports = lib => {
   }
 
   function update(req, res) {
-    lib.record.update(req.params.id, req.body.options, (err, data) => {
+    lib.record.update(req.params.id, req.body.options, (err, data) => {      
       if (err) return res.status(500).json({
         err: {
           code: 500,
           message: 'Unable to update record document'
         }
       });
-      return res.status(200).json(data.value);
+      var options = req.body.options
+      var data1 = data.value
+      if (options.speaker) {
+        data1.speaker = options.speaker;
+      };
+  
+      if (options.time||options.time===0) {
+        data1.time = options.time;
+      };
+  
+      if (options.content) {
+        data1.content = options.content;
+      };
+      return res.status(200).json(data1);
     });
   }
 }
