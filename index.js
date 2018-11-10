@@ -9,6 +9,8 @@ mongo(db => {
   const lib = require('./lib')(db);
   const application = require("./config/app")(lib);
   server = http.createServer(application);
+  let io = require('socket.io')(server);
+  require('./config/router')(application, lib, io);
   start(db);
 });
 

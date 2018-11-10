@@ -18,7 +18,6 @@ module.exports = lib => {
     application.use(passport.initialize());
     application.use(passport.session());
     application.use(cookieParser());
-    require('./router')(application, lib);
     require('./passport')(passport, lib);
     return application;
 }

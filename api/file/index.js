@@ -1,5 +1,5 @@
-module.exports = (router, lib) => {
-  const controller = require('./controller')(lib);
+module.exports = (router, lib, io) => {
+  const controller = require('./controller')(lib, io);
   const middleware = require('./middleware')(lib);
   const auth = require('../login/middlerware')(lib)
   
