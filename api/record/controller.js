@@ -46,19 +46,31 @@ module.exports = (lib, io) => {
         });
     }
 
-    function update(req, res) {
-        lib.record.update(req.params.id, req.body.options, (err, data) => {
-            if (err) return res.status(500).json({
-                err: {
-                    code: 500,
-                    message: 'Unable to update record document'
-                }
-            });
-            let record = req.body.options;
-            record["_id"] = req.params.id;
-            let dataEmit = {userId: req.user._id, record : record};
-            io.emit("edit_record", dataEmit);
-            return res.status(200).json(data.value);
-        });
-    }
+  function update(req, res) {
+    lib.record.update(req.params.id, req.body.options, (err, data) => {      
+      if (err) return res.status(500).json({
+        err: {
+          code: 500,
+          message: 'Unable to update record document'
+        }
+      });
+      var options = req.body.options
+      var data1 = data.value
+      if (options.speaker) {
+        data1.speaker = options.speaker;
+      };
+  
+      if (options.time||options.time===0) {
+        data1.time = options.time;
+      };
+  
+      if (options.content) {
+        data1.content = options.content;
+      };
+      let record = data1;
+      let dataEmit = {userId: req.user._id, record : record};
+      io.emit("edit_record", dataEmit);
+      return res.status(200).json(data1);
+    });
+  }
 }
