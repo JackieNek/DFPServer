@@ -1,5 +1,5 @@
-module.exports = (router, lib) => {
-    const controller = require('./controller')(lib);
+module.exports = (router, lib, io) => {
+    const controller = require('./controller')(lib, io);
     const auth = require('../login/middlerware')(lib);
     const middleware = require('./middleware')(lib); 
 
@@ -18,7 +18,7 @@ module.exports = (router, lib) => {
         controller.remove);
 
     router.put('/record/:id',
-        // auth.checkLogin,
-        // middleware.canUpdate,
+        auth.checkLogin,
+        middleware.canUpdate,
         controller.update);
 };
