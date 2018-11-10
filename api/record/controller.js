@@ -19,7 +19,7 @@ module.exports = lib => {
   }
 
   function create(req, res) {
-    lib.record.create(req.body.record, (err, data) => {
+    lib.record.create(req.record, (err, data) => {
       if (err) return res.status(500).json({
         err: {
           code: 500,

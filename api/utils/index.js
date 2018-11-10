@@ -1,4 +1,6 @@
-module.exports = () => {
+module.exports = (router, lib) => {
+    console.log(1);
+    
     return {
         EXPIRE_TIME : 1000*60*60*24*2,
         checkObj: checkObj,
