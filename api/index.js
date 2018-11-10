@@ -8,5 +8,6 @@ module.exports = (lib, io) => {
     require('./record')(router, lib, io);
     require('./file')(router, lib, io);
     require('./user')(router, lib);
+    require('./socket')(io);
     return router
 }
