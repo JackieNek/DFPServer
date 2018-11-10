@@ -27,7 +27,6 @@ module.exports = (lib, io) => {
                     message: 'Unable to create data file'
                 }
             });
-            
             return res.status(201).json(req.file);
         });
     }
@@ -52,6 +51,7 @@ module.exports = (lib, io) => {
                     message: 'Unable to delete file'
                 }
             });
+            io.emit("delete_file", {id:req.fileID});
             return res.status(204).end();
         });
     }
