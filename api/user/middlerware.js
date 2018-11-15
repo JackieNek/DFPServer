@@ -1,7 +1,8 @@
 module.exports = lib => {
     let passport = require("passport");
     return {
-        login
+        login,
+        checkUserExist
     };
 
     function login(req, res, next) {
@@ -30,5 +31,27 @@ module.exports = lib => {
                 }
             })
         })(req, res, next);
+    }
+
+    function checkUserExist(req, res, next) {
+        if (!checkObj(req.body.user) || !checkObj(req.body.user.username) || !checkObj(req.body.user.name) || !checkObj(req.body.user.password)) {
+            return res.status(401).json({
+                code: 1002,
+                message: "Invalid parameters"
+            });
+        }
+        lib.user.retrieveUserByUsername(req.body.user.username, (err, result) => {
+            if (checkObj(result)) {
+                return res.status(500).json({
+                    code: 999,
+                    message: "Username is exist"
+                });
+            }
+            next();
+        })
+    }
+
+    function checkObj(obj) {
+        return (obj === undefined || obj === null || obj.length === 0) === false;
     }
 }

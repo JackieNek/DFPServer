@@ -1,6 +1,7 @@
 module.exports = lib => {
     return {
-        getAllUser
+        getAllUser,
+        createUser
     };
 
     function getAllUser(req, res) {
@@ -22,6 +23,22 @@ module.exports = lib => {
                     message: "OK",
                     data: result
                 })
+            }
+        });
+    }
+
+    function createUser(req, res) {
+        lib.user.createUser(req.body.user, (err, result) => {
+            if (err) {
+                res.status(500).json({
+                    code: 500,
+                    message: "Unable to create user"
+                })
+            } else {
+                let user  = result.ops[0];
+                delete user.username;
+                delete user.password;
+                res.status(200).json(result.ops[0]);
             }
         });
     }
