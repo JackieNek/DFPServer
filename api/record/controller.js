@@ -57,7 +57,7 @@ module.exports = (lib, io) => {
       var options = req.body.options
       var data1 = data.value
       if (options.speaker) {
-        data1.speaker = options.speaker;
+        data1.speaker= options.speaker;
       };
   
       if (options.time||options.time===0) {
@@ -68,7 +68,10 @@ module.exports = (lib, io) => {
         data1.content = options.content;
       };
       let record = data1;
-      let dataEmit = {userId: req.user._id, record : record};
+      let userEmit = req.user;
+      delete userEmit.password;
+      delete userEmit.username;
+      let dataEmit = {user: userEmit, record : record};
       io.emit("edit_record", dataEmit);
       return res.status(200).json(data1);
     });
