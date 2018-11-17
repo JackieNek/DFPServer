@@ -15,7 +15,7 @@ module.exports = (router, lib, io) => {
     controller.createData);
 
   router.delete('/file/:id',
-    // auth.checkLogin,
+    auth.checkLogin,
     middleware.canRemove,
     controller.remove);
 
