@@ -28,8 +28,15 @@ module.exports = (lib, io) => {
             });
             let record = data.ops[0];
             let dataEmit = {userId: req.user._id, record : record};
-            io.emit("stream_file", dataEmit);
-            return res.status(201).json(data.ops[0]);
+         
+            lib.file.addHistory(record.fileId, {
+                time: req.body.timeChange,
+                message: `create record ${record.speaker} ${record.time} ${record.content}`,
+                author: req.user.name
+            }, (err, data) => {
+                io.emit("stream_file", dataEmit);
+                return res.status(201).json(record);
+            })
         });
     }
 
@@ -72,8 +79,16 @@ module.exports = (lib, io) => {
       delete userEmit.password;
       delete userEmit.username;
       let dataEmit = {user: userEmit, record : record};
-      io.emit("edit_record", dataEmit);
-      return res.status(200).json(data1);
+
+      lib.file.addHistory(record.fileId, {
+        time: options.timeChange,
+        message: `update record to ${record.speaker} ${record.time} ${record.content}`,
+        author: req.user.name
+      }, (err, data) => {
+        io.emit("edit_record", dataEmit);
+        return res.status(200).json(data1);
+      })
+      
     });
   }
 }

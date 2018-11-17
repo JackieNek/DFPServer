@@ -32,14 +32,19 @@ module.exports = (lib, io) => {
     }
 
     function update(req, res) {
-        lib.file.update(req.params.id, req.body.options, (err, data) => {
+        const author = req.user.name;
+        const options = req.body.options;
+        const id = req.params.id;
+        lib.file.update(author, id, options, (err, data) => {
             if (err) return res.status(500).json({
                 err: {
                     code: 500,
                     message: 'Unable to update file'
                 }
             });
-            return res.status(200).json(data.value);
+            lib.file.list({ fileId: id }, (err, data) => {
+                return res.status(200).json(data);
+            })
         })
     }
 

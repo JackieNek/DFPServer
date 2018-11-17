@@ -44,6 +44,7 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `  speaker: String,`
 ###### `  time: Number,`
 ###### `  content: String`
+###### `  userOn: Array`
 ###### `}`
 ##### 1. GET `/api/record`
 ##### Chức năng: liệt kê các bản ghi
@@ -64,6 +65,7 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `  time: Number,`
 ###### `  content: String`
 ###### `}`
+###### `time: 1354`
 ###### Đầu ra: `record` chứa thêm trường `_id`
 
 ##### 3. PUT `/api/record/:id`
@@ -82,7 +84,8 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `  name: String,`
 ###### `  creator: String,`
 ###### `  owners: Array`
-###### `  createAt: Number` 
+###### `  createAt: Number`
+###### `  history: ` 
 ###### `}`
 ##### 1. GET `/api/file`
 ##### Chức năng: liệt kê các file
@@ -104,7 +107,8 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `	name: "file 2",`
 ###### `    creator: "5bd7039bae427baf213d5c05"
 ###### `	createAt: 123456,`
-###### `	owners:[]`
+###### `	owners: []`
+###### `    history: []`
 ###### `}`
 
 ##### 3. PUT `/api/file/:id`

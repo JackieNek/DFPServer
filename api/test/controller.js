@@ -5,6 +5,7 @@ module.exports = (lib, io) => {
     };
 
     function list(req, res) {
+        console.log(req);
         res.status(200).json({test: 'ok'});
         io.emit("abc", {data: "data"});
     }
