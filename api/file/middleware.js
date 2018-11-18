@@ -49,7 +49,7 @@ module.exports = lib => {
     }
 
     lib.file.list(options, (err, data) => {
-      if (data) return res.status(401).json({
+      if (!data) return res.status(401).json({
         err: {
           code: 401,
           message: 'Access deniced to delete file'

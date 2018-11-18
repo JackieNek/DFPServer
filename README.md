@@ -71,12 +71,26 @@ Cung cấp các api cho việc xử lý file phân tán
 ##### 3. PUT `/api/record/:id`
 ###### Chức năng: Sửa một bản ghi có sẵn
 ###### Tham số `id` là id của bản ghi - kiểu dữ liệu ObjecID
-###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`
+###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`, `timeChange` thời gian của client trong `body`
 ###### Đầu ra: Bản ghi đã được sửa
 
 ##### 4. DELETE `/api/record/:id`
 ###### Chức năng: Xóa một bản ghi có sẵn
 ###### Tham số `recordID` là id của bản ghi - kiểu dữ liệu ObjecID
+
+##### 5. POST `/api/record/list-data/:fileID`
+###### Chức năng: tạo mới một bản ghi
+###### Đầu vào: data1, data2 chứa trong `body`
+###### `dataArray1: [{`
+###### `  speaker: String,`
+###### `  time: Number,`
+###### `}]`
+###### `dataArray2: [{`
+###### `  time: Number,`
+###### `  content: String`
+###### `}]`
+###### `time: 1354`
+###### Đầu ra: list `record` chứa thêm trường `_id`
 
 ### FILE
 #### Cấu trúc
@@ -87,6 +101,7 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `  createAt: Number`
 ###### `  history: ` 
 ###### `}`
+
 ##### 1. GET `/api/file`
 ##### Chức năng: liệt kê các file
 ##### Các tham số của query 
@@ -114,9 +129,13 @@ Cung cấp các api cho việc xử lý file phân tán
 ##### 3. PUT `/api/file/:id`
 ###### Chức năng: Sửa một bản ghi có sẵn
 ###### Tham số `fileID` là id của bản ghi - kiểu dữ liệu ObjecID
-###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`
+###### Đầu vào: `options` chứa các trường thay đổi ghi vào trong `body`, `timeChange` thời gian của client trong `body`
 ###### Đầu ra: File đã được sửa thông tin
 
 ##### 4. DELETE `/api/file/:id`
 ###### Chức năng: Xóa một file có sẵn
 ###### Tham số `id` là id của file - kiểu dữ liệu ObjecID
+
+##### 5. GET `/api/file/:id/history`
+##### Chức năng: liệt kê lich sử file
+##### params: `id` id chủa file

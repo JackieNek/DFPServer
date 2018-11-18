@@ -3,7 +3,8 @@ module.exports = (lib, io) => {
         list,
         createData,
         update,
-        remove
+        remove,
+        getHistory
     };
 
     function list(req, res) {
@@ -35,6 +36,7 @@ module.exports = (lib, io) => {
         const author = req.user.name;
         const options = req.body.options;
         const id = req.params.id;
+        options.timeChange = req.body.timeChange;
         lib.file.update(author, id, options, (err, data) => {
             if (err) return res.status(500).json({
                 err: {
@@ -59,5 +61,11 @@ module.exports = (lib, io) => {
             io.emit("delete_file", {id:req.fileID});
             return res.status(204).end();
         });
+    }
+
+    function getHistory(req, res) {
+        lib.file.list({ fileId: req.params.id }, (err, data) => {            
+            return res.status(200).json(data[0].history);
+        })
     }
 }
