@@ -61,7 +61,6 @@ module.exports = lib => {
 
     function mergeData(req, res, next) {
         req.dataArray = merge(req.dataArray1, req.dataArray2, req.params.fileID);
-        console.log("merge data", req.dataArray);
         next();
     }
 
