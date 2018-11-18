@@ -7,6 +7,10 @@ module.exports = (router, lib, io) => {
     auth.checkLogin,
     controller.list);
 
+  router.get('/file/:id/history',
+    auth.checkLogin,
+    controller.getHistory);
+
   router.post('/file',
     auth.checkLogin,
     middleware.mergeFile,

@@ -21,4 +21,10 @@ module.exports = (router, lib, io) => {
         auth.checkLogin,
         middleware.canUpdate,
         controller.update);
+
+    router.post('/record/list-data/:fileID',
+        auth.checkLogin,
+        middleware.checkData,
+        middleware.mergeData,
+        controller.createMany)
 };

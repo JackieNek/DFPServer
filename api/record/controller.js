@@ -3,7 +3,8 @@ module.exports = (lib, io) => {
         list,
         create,
         remove,
-        update
+        update,
+        createMany
     };
 
     function list(req, res) {
@@ -53,42 +54,62 @@ module.exports = (lib, io) => {
         });
     }
 
-  function update(req, res) {
-    lib.record.update(req.params.id, req.body.options, (err, data) => {      
-      if (err) return res.status(500).json({
-        err: {
-          code: 500,
-          message: 'Unable to update record document'
-        }
-      });
-      var options = req.body.options
-      var data1 = data.value
-      if (options.speaker) {
-        data1.speaker= options.speaker;
-      };
-  
-      if (options.time||options.time===0) {
-        data1.time = options.time;
-      };
-  
-      if (options.content) {
-        data1.content = options.content;
-      };
-      let record = data1;
-      let userEmit = req.user;
-      delete userEmit.password;
-      delete userEmit.username;
-      let dataEmit = {user: userEmit, record : record};
+    function update(req, res) {
+        lib.record.update(req.params.id, req.body.options, (err, data) => {      
+            if (err) return res.status(500).json({
+                err: {
+                    code: 500,
+                    message: 'Unable to update record document'
+                }
+            });
 
-      lib.file.addHistory(record.fileId, {
-        time: options.timeChange,
-        message: `update record to ${record.speaker} ${record.time} ${record.content}`,
-        author: req.user.name
-      }, (err, data) => {
-        io.emit("edit_record", dataEmit);
-        return res.status(200).json(data1);
-      })
-      
-    });
-  }
+            var options = req.body.options
+            var data1 = data.value
+
+            if (options.speaker) {
+                data1.speaker= options.speaker;
+            };
+        
+            if (options.time||options.time===0) {
+                data1.time = options.time;
+            };
+        
+            if (options.content) {
+                data1.content = options.content;
+            };
+            
+            let record = data1;
+            let userEmit = req.user;
+            delete userEmit.password;
+            delete userEmit.username;
+            let dataEmit = {user: userEmit, record : record};
+
+            lib.file.addHistory(record.fileId, {
+                time: req.body.timeChange,
+                message: `update record to ${record.speaker} ${record.time} ${record.content}`,
+                author: req.user.name
+            }, (err, data) => {
+                io.emit("edit_record", dataEmit);
+                return res.status(200).json(data1);
+            }) 
+        });
+    }
+
+    function createMany (req, res) {
+        lib.record.createMany(req.dataArray, (err, data) => {
+            if (err) return res.status(500).json({
+                err: {
+                    code: 500,
+                    message: 'Unable to create many record document'
+                }
+            });
+            lib.file.addHistory(req.params.fileID, {
+                time: req.body.time,
+                message: "create many record",
+                author: req.user.name
+            }, (err, docs) => {
+                return res.status(200).json(data.ops)
+            })
+        });
+    }
 }
