@@ -108,6 +108,7 @@ module.exports = (lib, io) => {
                 message: "create many record",
                 author: req.user.name
             }, (err, docs) => {
+                io.emit("create_many_record", data.ops)
                 return res.status(200).json(data.ops)
             })
         });
