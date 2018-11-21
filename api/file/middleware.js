@@ -14,7 +14,7 @@ module.exports = lib => {
       owners: req.body.owners,
       createAt: req.body.createAt,
       date: req.body.date,
-      description: req.body.description
+      description: req.body.description,
       history: [{
         time: req.body.createAt,
         message: `Create new file ${req.body.name}`,
