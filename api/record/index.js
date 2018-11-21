@@ -2,7 +2,7 @@ module.exports = (router, lib, io) => {
     const controller = require('./controller')(lib, io);
     const auth = require('../login/middlerware')(lib);
     const middleware = require('./middleware')(lib);
-    const temporary = require('../temporary/middleware')(lib)
+    const temporary = require('../temporary/middleware')(lib, io)
 
     router.get('/record',
         auth.checkLogin,
