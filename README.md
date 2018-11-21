@@ -80,7 +80,7 @@ Cung cấp các api cho việc xử lý file phân tán
 
 ##### 5. POST `/api/record/list-data/:fileID`
 ###### Chức năng: tạo mới một bản ghi
-###### Đầu vào: data1, data2 chứa trong `body`
+###### Đầu vào: data1, data2 chứa trong `body` một trong 2 trường có thể bằng `null`
 ###### `dataArray1: [{`
 ###### `  speaker: String,`
 ###### `  time: Number,`
@@ -122,7 +122,7 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `{`
 ###### `    _id: "5bd7039bae427baf213d5c05"`
 ###### `	name: "file 2",`
-###### `    creator: "5bd7039bae427baf213d5c05"
+###### `    creator: "5bd7039bae427baf213d5c05"`
 ###### `	createAt: 123456,`
 ###### `	owners: []`
 ###### `    history: []`
