@@ -1,7 +1,8 @@
 module.exports = (router, lib, io) => {
     const controller = require('./controller')(lib, io);
     const auth = require('../login/middlerware')(lib);
-    const middleware = require('./middleware')(lib); 
+    const middleware = require('./middleware')(lib);
+    const temporary = require('../temporary/middleware')(lib)
 
     router.get('/record',
         auth.checkLogin,
@@ -25,6 +26,12 @@ module.exports = (router, lib, io) => {
     router.post('/record/list-data/:fileID',
         auth.checkLogin,
         middleware.checkData,
+        temporary.addDataWhoToTemporary,
+        temporary.addDataWhatToTemporary,
+        temporary.getDataWhoFromTemporary,
+        temporary.getDataWhatFromTemporary,
         middleware.mergeData,
+        temporary.updateDataWhoToTemporary,
+        temporary.updateDataWhatToTemporary,
         controller.createMany)
 };

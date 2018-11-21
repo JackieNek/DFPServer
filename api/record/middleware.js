@@ -44,9 +44,16 @@ module.exports = lib => {
     }
 
     function checkData(req, res, next) {
-        if(req.body.dataArray1 && req.body.dataArray2) {
-            req.dataArray1 = req.body.dataArray1;
-            req.dataArray2 = req.body.dataArray2;
+        if ((req.body.dataArray1 || req.body.dataArray2) && req.params.fileID) {
+            if (req.body.dataArray1) {
+                req.dataWho = req.body.dataArray1;
+                req.dataWho.map(data => data.fileId = new ObjectID(req.params.fileID));
+            };
+
+            if (req.body.dataArray2) {
+                req.dataWhat = req.body.dataArray2;
+                req.dataWhat.map(data => data.fileId = new ObjectID(req.params.fileID));
+            };
             next();
         } else {
             return res.status(406).json({
@@ -55,38 +62,46 @@ module.exports = lib => {
                     message: 'Invalid data'
                 },
                 dataErr: req.body
-            })
-        }
+            });
+        };
     }
 
     function mergeData(req, res, next) {
-        req.dataArray = merge(req.dataArray1, req.dataArray2, req.params.fileID);
-        next();
-    }
+        if (req.dataArray1 && req.dataArray2) {
+            req.data = merge(req.dataArray1, req.dataArray2);        
+            next();
+        } else {
+            next();
+        };
+    }   
 
-    function compareByTime(data_1, data_2) {
+    function compareByTimeAndAfr(data_1, data_2) {
         const time_1 = data_1.time;
         const time_2 = data_2.time;
+        const afr_1 = data_1.afr;
+        const afr_2 = data_2.afr;
 
         if (time_1 > time_2) {
             return 1;
         } else if (time_1 < time_2) {
             return -1;
         } else {
-            return 0;
+            return afr_1.localeCompare(afr_2);
         }
     }
 
-    function merge (arr1, arr2, fileID) {
+    function merge (arr1, arr2) {
         let count_data_1 = 0;
         let count_data_2 = 0;
-        let arr = [];
+        let records = [];
+        let dataWhoNeedUpdate = [];
+        let dataWhatNeedUpdate = [];
 
-        arr1.sort(compareByTime);
-        arr2.sort(compareByTime);
+        arr1.sort(compareByTimeAndAfr);
+        arr2.sort(compareByTimeAndAfr);
         
         do {
-            switch (compareByTime(arr1[count_data_1], arr2[count_data_2])) {
+            switch (compareByTimeAndAfr(arr1[count_data_1], arr2[count_data_2])) {
                 case 1: {
                     count_data_2++;
                     break;
@@ -96,7 +111,9 @@ module.exports = lib => {
                     break;
                 }
                 case 0: {
-                    arr.push(mergeRecordByData(arr1[count_data_1], arr2[count_data_2], fileID));
+                    records.push(mergeRecordByData(arr1[count_data_1], arr2[count_data_2], arr1[count_data_1].fileID));
+                    dataWhoNeedUpdate.push(arr1[count_data_1]);
+                    dataWhatNeedUpdate.push(arr2[count_data_2]);
                     count_data_1++;
                     count_data_2++
                     break;
@@ -104,6 +121,10 @@ module.exports = lib => {
             };
         } while(count_data_1 < arr1.length && count_data_2 < arr2.length)
 
-        return arr
+        return {
+            records: records,
+            dataWhoNeedUpdate: dataWhoNeedUpdate,
+            dataWhatNeedUpdate: dataWhatNeedUpdate
+        }
     }
 }
