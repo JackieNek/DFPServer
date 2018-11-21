@@ -99,6 +99,8 @@ Cung cấp các api cho việc xử lý file phân tán
 ###### `  creator: String,`
 ###### `  owners: Array`
 ###### `  createAt: Number`
+###### `  description: String`
+###### `  date: Number`
 ###### `  history: ` 
 ###### `}`
 
