@@ -66,7 +66,7 @@ module.exports = lib => {
         };
     }
 
-    function mergeData(req, res, next) {
+    function mergeData(req, res, next) {        
         if (req.dataArray1 && req.dataArray2) {
             req.data = merge(req.dataArray1, req.dataArray2);        
             next();
