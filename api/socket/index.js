@@ -10,15 +10,5 @@ module.exports = (io, lib) => {
                 io.emit("un_focus_record", data);
             });
         });
-        socket.on("create_data_file_who", (data) => {
-            lib.who.list({fileId: data.fileId}, data => {
-                io.emit("create_data_file_who", data)
-            });
-        });
-        socket.on("create_data_file_what", (data) => {
-            lib.what.list({fileId: data.fileId}, data => {
-                io.emit("create_data_file_what", data)
-            });
-        });
     });
 };
