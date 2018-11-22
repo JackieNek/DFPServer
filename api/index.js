@@ -9,5 +9,7 @@ module.exports = (lib, io) => {
     require('./file')(router, lib, io);
     require('./user')(router, lib);
     require('./socket')(io, lib);
+    require('./temporary')(router, lib, io);
+
     return router
 }

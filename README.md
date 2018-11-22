@@ -141,3 +141,63 @@ Cung cấp các api cho việc xử lý file phân tán
 ##### 5. GET `/api/file/:id/history`
 ##### Chức năng: liệt kê lich sử file
 ##### params: `id` id chủa file
+
+### TEMPORARY
+
+##### 1. GET `/api/temporary/:fileId`
+##### params `fileId` là id của file String
+##### trả về
+##### `{`
+##### `    "temporary_who": [`
+##### `        {`
+##### `            "_id": "5bf57654e6ce4d37686c1f0e",`
+##### `            "speaker": "Bumbebesádfasda",`
+##### `            "time": 8,`
+##### `            "afr": "50,80,90",`
+##### `            "fileId": "5bf0d5560a16fe138ca7fbff",`
+##### `            "merge": true`
+##### `        },`
+##### `        {`
+##### `            "_id": "5bf57654e6ce4d37686c1f10",`
+##### `            "speaker": "Bumbebeádasdas",`
+##### `            "time": 55,`
+##### `            "afr": "50,80,95",`
+##### `            "fileId": "5bf0d5560a16fe138ca7fbff",`
+##### `            "merge": true`
+##### `        },`
+##### `        {`
+##### `            "_id": "5bf57654e6ce4d37686c1f0f",`
+##### `            "speaker": "Optimusádasd",`
+##### `            "time": 777,`
+##### `            "afr": "50,80",`
+##### `            "fileId": "5bf0d5560a16fe138ca7fbff",`
+##### `            "merge": true`
+##### `        }`
+##### `    ],`
+#####     "temporary_what": [`
+##### `        {`
+##### `            "_id": "5bf57655e6ce4d37686c1f11",`
+##### `            "content": "aaa",`
+##### `            "time": 8,`
+##### `            "afr": "50,80,90",`
+##### `            "fileId": "5bf0d5560a16fe138ca7fbff",`
+##### `            "merge": true`
+##### `        },`
+##### `        {`
+##### `            "_id": "5bf57655e6ce4d37686c1f13",`
+##### `            "content": "aaa",`
+##### `            "time": 55,`
+##### `            "afr": "50,80,95",`
+##### `            "fileId": "5bf0d5560a16fe138ca7fbff",`
+##### `            "merge": true`
+##### `        },`
+##### `        {`
+##### `            "_id": "5bf57655e6ce4d37686c1f12",`
+##### `            "content": "aaa",`
+##### `            "time": 777,`
+##### `            "afr": "50,80",`
+##### `            "fileId": "5bf0d5560a16fe138ca7fbff",`
+##### `            "merge": true`
+##### `        }`
+##### `    ]`
+##### `}`
