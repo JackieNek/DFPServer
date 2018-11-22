@@ -68,7 +68,7 @@ module.exports = (lib, io) => {
             merge: true
         };
 
-        if(req.data.dataWhoNeedUpdate){
+        if(req.data){
             req.data.dataWhoNeedUpdate.map(data => options.filter.push(data._id));
             lib.who.updateMany(options, (err, data) => {
                 if (err) return send500Err(res, 'Unable to set merge = true from who temporary');
@@ -85,7 +85,7 @@ module.exports = (lib, io) => {
             merge: true
         };
 
-        if(req.data.dataWhatNeedUpdate){
+        if(req.data){
             req.data.dataWhatNeedUpdate.map(data => options.filter.push(data._id));
             lib.what.updateMany(options, (err, data) => {
                 if (err) return send500Err(res, 'Unable to set merge = true from what temporary');
