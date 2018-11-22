@@ -45,12 +45,12 @@ module.exports = lib => {
 
     function checkData(req, res, next) {
         if ((req.body.dataArray1 || req.body.dataArray2) && req.params.fileID) {
-            if (req.body.dataArray1) {
+            if (req.body.dataArray1 && (req.body.dataArray1.length !== 0)) {
                 req.dataWho = req.body.dataArray1;
                 req.dataWho.map(data => data.fileId = new ObjectID(req.params.fileID));
             };
 
-            if (req.body.dataArray2) {
+            if (req.body.dataArray2 && (req.body.dataArray2.length !== 0)) {
                 req.dataWhat = req.body.dataArray2;
                 req.dataWhat.map(data => data.fileId = new ObjectID(req.params.fileID));
             };
