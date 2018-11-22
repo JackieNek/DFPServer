@@ -96,7 +96,7 @@ module.exports = (lib, io) => {
     }
 
     function createMany (req, res) {        
-        if (!req.data.records) return res.status(204).end();
+        if (!req.data) return res.status(204).end();
         lib.record.createMany(req.data.records, (err, data) => {
             if (err) return res.status(500).json({
                 err: {
