@@ -12,10 +12,8 @@ module.exports = (lib, io) => {
         if (req.dataWho) {
             lib.who.createMany(req.dataWho, (err, data) => {                
                 if (err) return send500Err(res, 'Unable to add data who to temporary');
-                else {
                     io.emit("tempory_who", req.body.dataArray1);
-                    next();
-                };
+                next();
             });
         } else {
             next();
@@ -26,10 +24,8 @@ module.exports = (lib, io) => {
         if (req.dataWhat) {
             lib.what.createMany(req.dataWhat, (err, data) => {
                 if (err) return send500Err(res, 'Unable to add data what to temporary');
-                else {
                     io.emit("tempory_what", req.body.dataArray2);
                     next();
-                };
             });
         } else {
             next();

@@ -98,6 +98,7 @@ module.exports = (lib, io) => {
     function createMany (req, res) {        
         if ((!req.data) || (req.data.records && (req.data.records.length === 0))) return res.status(204).end();
         lib.record.createMany(req.data.records, (err, data) => {
+            
             if (err) return res.status(500).json({
                 err: {
                     code: 500,
@@ -108,7 +109,7 @@ module.exports = (lib, io) => {
                 time: req.body.time,
                 message: "create many record",
                 author: req.user.name
-            }, (err, docs) => {
+            }, (err, docs) => {                
                 io.emit("create_many_record", data.ops)
                 return res.status(200).json(data.ops)
             })
