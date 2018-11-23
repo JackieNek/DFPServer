@@ -53,8 +53,7 @@ module.exports = lib => {
             if (req.body.dataArray2 && (req.body.dataArray2.length !== 0)) {
                 req.dataWhat = req.body.dataArray2;
                 req.dataWhat.map(data => data.fileId = new ObjectID(req.params.fileID));
-            };
-            next();
+            };            
         } else {
             return res.status(406).json({
                 err: {
@@ -64,14 +63,12 @@ module.exports = lib => {
                 dataErr: req.body
             });
         };
+        next();
     }
 
-    function mergeData(req, res, next) {
-        console.log(req.dataArray1);
-        console.log(req.dataArray2);
-        
+    function mergeData(req, res, next) {        
         if ((req.dataArray1.length !== 0) && (req.dataArray2.length !== 0)) {
-            req.data = merge(req.dataArray1, req.dataArray2);        
+            req.data = merge(req.dataArray1, req.dataArray2, req.params.fileID);        
             next();
         } else {
             next();
@@ -93,7 +90,7 @@ module.exports = lib => {
         }
     }
 
-    function merge (arr1, arr2) {
+    function merge (arr1, arr2, fileID) {
         let count_data_1 = 0;
         let count_data_2 = 0;
         let records = [];
@@ -114,7 +111,7 @@ module.exports = lib => {
                     break;
                 }
                 case 0: {
-                    records.push(mergeRecordByData(arr1[count_data_1], arr2[count_data_2], arr1[count_data_1].fileID));
+                    records.push(mergeRecordByData(arr1[count_data_1], arr2[count_data_2], fileID));
                     dataWhoNeedUpdate.push(arr1[count_data_1]);
                     dataWhatNeedUpdate.push(arr2[count_data_2]);
                     count_data_1++;

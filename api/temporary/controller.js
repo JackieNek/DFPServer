@@ -8,13 +8,10 @@ module.exports = (lib) => {
         lib.who.list({fileId: req.params.fileId}, (err, data) => {
             if (err) return send500Err(res, 'Unable to get data who from temporary');
             temp.temporary_who = data;
-            console.log("who", data);
             
             lib.what.list({fileId: req.params.fileId}, (err, doc) => {
                 if (err) return send500Err(res, 'Unable to get data what from temporary');
-                temp.temporary_what = doc;
-               console.log(doc);
-                
+                temp.temporary_what = doc;                
                 return res.status(200).json(temp)
             })
         })
